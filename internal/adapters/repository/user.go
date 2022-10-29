@@ -2,11 +2,11 @@ package repository
 
 import "zuri-stage-one/internal/core/models"
 
-func (p *Postgres) Get() ([]models.User, error) {
-	var users []models.User
+func (p *Postgres) Get() (*models.User, error) {
+	user := &models.User{}
 
-	if err := p.DB.Find(&users).Error; err != nil {
+	if err := p.DB.Find(user).Error; err != nil {
 		return nil, err
 	}
-	return users, nil
+	return user, nil
 }
