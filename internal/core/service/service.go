@@ -15,6 +15,6 @@ func NewUserService(userRepository ports.UserRepository) ports.UserService {
 	}
 }
 
-func (u *userService) Get() ([]models.User, error) {
+func (u *userService) Get() (*models.User, error) {
 	return u.userRepository.Get()
 }
