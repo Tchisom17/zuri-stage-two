@@ -3,11 +3,13 @@ package api
 import "zuri-stage-one/internal/ports"
 
 type HTTPHandler struct {
-	UserService ports.UserService
+	UserService      ports.UserService
+	OperationService ports.OperationService
 }
 
-func NewHTTPHandler(userService ports.UserService) *HTTPHandler {
+func NewHTTPHandler(userService ports.UserService, operationService ports.OperationService) *HTTPHandler {
 	return &HTTPHandler{
-		UserService: userService,
+		UserService:      userService,
+		OperationService: operationService,
 	}
 }
