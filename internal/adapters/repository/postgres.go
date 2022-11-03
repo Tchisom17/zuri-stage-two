@@ -18,6 +18,10 @@ func NewUser(DB *gorm.DB) ports.UserRepository {
 	return &Postgres{DB}
 }
 
+func NewOperation(DB *gorm.DB) ports.OperationRepository {
+	return &Postgres{DB}
+}
+
 func ConnectDb(config *helpers.Config) (*gorm.DB, error) {
 	var dsn string
 	databaseURL := os.Getenv("DATABASE_URL")
@@ -36,5 +40,5 @@ func ConnectDb(config *helpers.Config) (*gorm.DB, error) {
 }
 
 func MigrateAll(db *gorm.DB) error {
-	return db.AutoMigrate(&models.User{})
+	return db.AutoMigrate(&models.User{}, &models.Operation{})
 }
