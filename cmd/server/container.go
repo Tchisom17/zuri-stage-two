@@ -10,9 +10,11 @@ import (
 
 // Injection inject all dependencies
 func Injection(db *gorm.DB) {
+	operationRepository := repository.NewOperation(db)
 	userRepository := repository.NewUser(db)
+	operationService := service.NewOperationService(operationRepository)
 	userService := service.NewUserService(userRepository)
-	Handler := api.NewHTTPHandler(userService)
+	Handler := api.NewHTTPHandler(userService, operationService)
 	router := SetupRouter(Handler)
 
 	_ = router.Run(":" + helpers.Instance.Port)
